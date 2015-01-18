@@ -1,13 +1,32 @@
+<p class='pull-right'>
+  [<%= link_to 'Edit this post', edit_post_path(@post) %>]
+</p>
 <p>
   <%= render @post.categories %>
 </p>
 
-
 <%= render 'shared/content_title', title: @post.title %>
-
-<p>
-  <%= @post.description %>
-</p>
-</hr>
-
+<div class='row'>
+  <div class='span8 well'>
+    <p>
+      <h4>Description:</h4>
+      <%= @post.description %>
+    </p>
+    </br>
+    <p>
+      <h4>Url:</h4>
+      <%= @post.url %>
+    </p>
+  </div>
+</div>
 <%= link_to 'go back to all posts', posts_path %>
+
+</br>
+</br>
+<h4>Create a comment</h4>
+
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :body %>
+  </br>
+  <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
+<% end %>

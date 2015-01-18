@@ -1,0 +1,12 @@
+<% if postit_object.errors.any? %>
+<div class='row'>
+  <div class='alert alert-error span8'>
+    <h5>There are <%= pluralize(postit_object.errors.count, "error") %><h5>
+      <ul>
+        <% postit_object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% end %>

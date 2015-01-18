@@ -1,0 +1,11 @@
+<%= render 'shared/error_messages', postit_object: @category  %>
+
+<div class='well'>
+  <%= form_for @category do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+      <%= f.submit 'Create Category', class: 'btn btn-success'%>
+  <% end %>
+</div>

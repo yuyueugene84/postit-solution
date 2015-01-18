@@ -1,6 +1,6 @@
-<%= render 'shared/content_title', title: 'All Posts'%>
+<%= render 'shared/content_title', title: 'Showing: #{@category.name}' %>
 
-<% @posts.each do |post| %>
+<% @category.posts.each do |post| %>
 <div class='row'>
   <div class='span8 well'>
 
