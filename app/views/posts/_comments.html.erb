@@ -1,0 +1,12 @@
+<h4>Comments for this post:</h4>
+<% comments.each do |comment| %>
+<div class='row'>
+  <div class='well span8 comment'>
+    <em>"<%= comment.body %>"</em>
+    <p>
+      <span class='quiet'>comment by</span> <%= comment.creator.username %>
+      <small>at <%= fix_time_format(comment.created_at) %></small>
+    </p>
+  </div>
+</div>
+<% end %>

@@ -1,1 +1,14 @@
-<span class='badge'><%= category.name %></span>
+<% if category.name == 'Ruby' %>
+  <span class='badge badge-important'>
+<% elsif category.name == 'Python' %>
+  <span class='badge badge-info'>
+<% elsif category.name == 'News' %>
+  <span class='badge badge-success'>
+<% elsif category.name == 'Objective-C' %>
+  <span class='badge badge-inverse'>
+<% elsif category.name == 'Javascript' %>
+  <span class='badge badge-warning'>
+<% else %>
+  <span class="badge">
+<% end %>
+  <%= link_to category.name, category_path(category) %></span>

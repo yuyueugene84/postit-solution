@@ -10,16 +10,19 @@ class PostsController < ApplicationController
     #binding.pry
     #instance variable means view template has access to it when you render
     @comment = Comment.new
+    @comments = @post.comments
   end
 
   def new
     @post = Post.new
+    @categories = Category.all
   end
 
   def create
-    #binding.pry
+    binding.pry
     @post = Post.new(post_params)
     @post.creator = User.first
+    #@post.category_ids = params[:post][:category_ids]
 
     if @post.save
       flash[:notice] = "Post created！"
@@ -51,7 +54,8 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, :url, :description, category_ids: [])
+    #params.require(:categories).permit(:id)
   end
 
   def post_setup

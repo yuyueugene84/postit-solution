@@ -4,13 +4,12 @@
   </li>
 </ul>
 
-<div class='btn-group nav_item'>
-  <%#= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>
-  <a href="#" class="btn btn-small btn-warning dropdown-toggle" data-toggle="dropdown">
+<div class="btn-group nav_item">
+  <%= link_to '#', class: 'btn btn-small btn-warning dropdown-toggle', 'data-toggle' => 'dropdown' do %>
     Categories <span class='caret'></span>
-  </a>
-  <%# end %>
-  <ul class='dropown-menu'>
+  <% end %>
+  <!--<ul class='dropown-menu'>-->
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
     <% Category.all.each do |category|%>
     <li>
       <%= link_to category.name, category_path(category)%>

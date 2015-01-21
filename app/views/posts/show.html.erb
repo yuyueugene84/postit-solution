@@ -1,11 +1,15 @@
 <p class='pull-right'>
   [<%= link_to 'Edit this post', edit_post_path(@post) %>]
 </p>
+
+<%= render 'shared/content_title', title: @post.title %>
+
 <p>
   <%= render @post.categories %>
 </p>
 
-<%= render 'shared/content_title', title: @post.title %>
+<h4>You are viewing <%= link_to @post.title, fix_url(@post.url) %></h4>
+<%#= @post.fixed_url %>
 <div class='row'>
   <div class='span8 well'>
     <p>
@@ -19,14 +23,20 @@
     </p>
   </div>
 </div>
+
 <%= link_to 'go back to all posts', posts_path %>
 
 </br>
 </br>
-<h4>Create a comment</h4>
 
+<h4>Leave a comment</h4>
 <%= form_for [@post, @comment] do |f| %>
-  <%= f.text_area :body %>
+  <%= render 'shared/error_messages', postit_object: @comment  %>
+  <%= f.text_area :body, rows: 3, class: 'span4' %>
   </br>
   <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
+<% end %>
+
+<% if !@post.comments.empty? %>
+  <%= render 'comments', comments: @comments %>
 <% end %>
