@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
 
-  before_action :post_setup, :only => [:show, :edit, :update]
+  before_action :post_setup, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
 
   def index
+    #binding.pry
     @posts = Post.all
+    #params[:id] = current_user[:id]
+    #@user = current_user
   end
 
   def show
@@ -19,10 +23,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    binding.pry
+    
     @post = Post.new(post_params)
-    @post.creator = User.first
-    #@post.category_ids = params[:post][:category_ids]
+    @post.creator = current_user
 
     if @post.save
       flash[:notice] = "Post created！"

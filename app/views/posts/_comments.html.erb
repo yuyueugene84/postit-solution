@@ -1,10 +1,16 @@
+<% show_post ||= false %>
+
 <h4>Comments for this post:</h4>
 <% comments.each do |comment| %>
 <div class='row'>
   <div class='well span8 comment'>
     <em>"<%= comment.body %>"</em>
+    <% if show_post %>
+    on <%= link_to comment.post.title, post_path(comment.post) %>
+    <% end %>
     <p>
-      <span class='quiet'>comment by</span> <%= comment.creator.username %>
+      <hr>
+      <span class='quiet'>comment by</span> <%= link_to comment.creator.username, user_path(comment.creator) %>
       <small>at <%= fix_time_format(comment.created_at) %></small>
     </p>
   </div>

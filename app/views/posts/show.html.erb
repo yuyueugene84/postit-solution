@@ -1,7 +1,8 @@
-<p class='pull-right'>
-  [<%= link_to 'Edit this post', edit_post_path(@post) %>]
-</p>
-
+<% if logged_in? %>
+  <p class='pull-right'>
+    [<%= link_to 'Edit this post', edit_post_path(@post) %>]
+  </p>
+<% end %>
 <%= render 'shared/content_title', title: @post.title %>
 
 <p>
@@ -29,14 +30,16 @@
 </br>
 </br>
 
-<h4>Leave a comment</h4>
-<%= form_for [@post, @comment] do |f| %>
-  <%= render 'shared/error_messages', postit_object: @comment  %>
-  <%= f.text_area :body, rows: 3, class: 'span4' %>
-  </br>
-  <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
+<% if logged_in? %>
+  <h4>Leave a comment</h4>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= render 'shared/error_messages', postit_object: @comment  %>
+    <%= f.text_area :body, rows: 3, class: 'span4' %>
+    </br>
+    <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
+  <% end %>
 <% end %>
 
 <% if !@post.comments.empty? %>
-  <%= render 'comments', comments: @comments %>
+  <%= render 'comments', comments: @comments, show_post: false %>
 <% end %>
