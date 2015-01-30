@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
 
-  before_action :post_setup, only: [:show, :edit, :update]
+  before_action :post_setup, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
 
   def index
     #binding.pry
-    @posts = Post.all
+    @posts = Post.all.sort_by{|x| x.total_votes}.reverse
     #params[:id] = current_user[:id]
     #@user = current_user
   end
@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     #binding.pry
     #instance variable means view template has access to it when you render
     @comment = Comment.new
-    @comments = @post.comments
+    @comments = @post.comments.all.sort_by{|x| x.total_votes}.reverse
   end
 
   def new
@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    
+
     @post = Post.new(post_params)
     @post.creator = current_user
 
@@ -50,6 +50,24 @@ class PostsController < ApplicationController
   end
 
   def destroy
+
+  end
+
+  def vote
+
+
+    @vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+
+    #binding.pry
+
+    if @vote.valid?
+      flash[:notice] = 'Your vote was counted!'
+    else
+      flash[:error] = "You can only vote for <strong>#{@post.title}</strong> once!".html_safe
+      #html_safe is for rails to evaluating output as html instead of string.
+    end
+
+    redirect_to :back
 
   end
 

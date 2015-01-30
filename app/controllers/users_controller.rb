@@ -26,7 +26,6 @@ class UsersController < ApplicationController
   end
 
   def update
-
     if @user.update(user_params)
       flash[:notice]= "You have updated your info"
       redirect_to user_path(@user)

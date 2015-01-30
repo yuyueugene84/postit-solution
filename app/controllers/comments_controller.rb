@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :require_user, only:[:create]
+  before_action :require_user, only:[:create, :vote]
 
   def create
     #binding.pry
@@ -17,8 +17,30 @@ class CommentsController < ApplicationController
   end
 
   def show
+
     @post = Post.find(params[:post_id])
     @comments = @post.comments.all
+
+  end
+
+  def vote
+    #binding.pry
+
+    @comment = Comment.find(params[:id])
+
+    @vote = Vote.create(voteable: @comment, creator: current_user, vote: params[:vote])
+
+    #binding.pry
+
+    if @vote.valid?
+      flash[:notice] = 'Your vote was counted!'
+    else
+      flash[:error] = "You can only vote for this comment once!".html_safe
+      #html_safe is for rails to evaluating output as html instead of string.
+    end
+
+    redirect_to :back
+
   end
 
 end

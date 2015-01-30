@@ -15,7 +15,21 @@ PostitTemplate::Application.routes.draw do
   get '/logout', to: 'sessions#destroy'
 
   resources :posts, except: [:destroy] do
-    resources :comments, only: [:create, :show]
+    member do  #member is for the extra action of every members of a resource
+      post :vote  #will generate POST /posts/3/vote
+    end
+
+    # collection do  #page not for a specific member of a resource
+    #   get :archives  #will generate GET /posts/archives
+    # end
+
+    resources :comments, only: [:create, :show] do
+      member do  #member is for the extra action of every members of a resource
+        post :vote  #will generate POST /posts/3/vote
+      end
+    end
+
+
   end
 
   resources :categories, only: [:index, :new, :create, :show]
