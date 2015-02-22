@@ -27,6 +27,7 @@
     <%= render post.categories %>
     <h4><%= link_to post.title, post_path(post) %></h4>
     <p><%= post.description %></p>
+    <hr>
     <p>
       <span class='quiet'>post by</span> <%= link_to post.creator.username, user_path(post.creator) %>
       <small>at <%= fix_time_format(post.created_at) %></small>

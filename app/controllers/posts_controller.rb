@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
 
   before_action :post_setup, only: [:show, :edit, :update, :vote]
-  before_action :require_user, except: [:index, :show]
+  before_action :require_user, except: [:index, :show] 
+  before_action :require_creator, only: [:edit, :update] #has to be original creator or admin to edit post
 
   def index
     #binding.pry
@@ -86,6 +87,11 @@ class PostsController < ApplicationController
   def post_setup
     @post = Post.find_by slug: params[:id]
     #binding.pry
+  end
+
+  def require_creator
+    #access_denied if logged_in? || (logged_in? and current_user != @post.creator)
+    access_denied unless logged_in? and (current_user == @post.creator || current_user.admin?) #better way of writing it
   end
 
 end

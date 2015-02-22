@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
 
   def moderator?
     self.role == 'moderator'
+  end
   # def to_param
   #   self.slug
   # end

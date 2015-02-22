@@ -21,7 +21,7 @@ module Sluggable
       count += 1
     end
 
-    #binding.pry
+    binding.pry
 
     self.slug = the_slug.downcase
 
@@ -39,6 +39,7 @@ module Sluggable
     str = name.strip
     str.gsub! /\s*[^A-Za-z0-9]\s*/, '-'
     str.gsub! /-+/, "-"
+    str.downcase
   end
 
   module ClassMethods
