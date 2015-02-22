@@ -15,6 +15,13 @@ class User < ActiveRecord::Base
   after_validation :generate_slug!
 
   sluggable_column :username
+
+  def admin?
+    self.role == 'admin'
+  end
+
+  def moderator?
+    self.role == 'moderator'
   # def to_param
   #   self.slug
   # end

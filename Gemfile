@@ -13,7 +13,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'bcrypt-ruby', '=3.0.1'
-
+#gem 'voteable_eugene_chang', '=0.0.2'
+gem 'voteable_eugene_chang', '=0.0.2', path: '/Users/yuyueugene84_macbook/ruby_projects/voteable-gem'
+#using a local gem for testing
 group :doc do
   gem 'sdoc', require: false
 end

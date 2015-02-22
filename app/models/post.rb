@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
 
-  include Voteable
+  #include Voteable
+  include VoteableEugeneChang
   include Sluggable
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'   #rename association, assume foregin key called creator_id and class Creator
