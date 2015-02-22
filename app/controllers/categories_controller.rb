@@ -46,7 +46,8 @@ class CategoriesController < ApplicationController
   end
 
   def category_setup
-    @category = Category.find(params[:id])
+    #@category = Category.find(params[:id])
+    @category = Category.find_by slug: params[:id]
   end
 
 end

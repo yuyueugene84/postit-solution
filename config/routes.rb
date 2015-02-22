@@ -25,7 +25,7 @@ PostitTemplate::Application.routes.draw do
 
     resources :comments, only: [:create, :show] do
       member do  #member is for the extra action of every members of a resource
-        post :vote  #will generate POST /posts/3/vote
+        post :vote  #will generate POST /posts/3/comments/4/vote
       end
     end
 

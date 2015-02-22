@@ -1,0 +1,8 @@
+//alert('hi there, u voted!');
+<% if @vote.valid? %>
+  $("#post_<%= @post.slug %>_votes").html("<%= @post.total_votes %> votes");
+<% else %>
+  //flash[:error] = "You can only vote for <strong>#{@post.title}</strong> once!".html_safe
+  //alert("You can only vote a post once!");
+  $("#post_vote_error_<%= @post.slug %>").show().html('<%= @vote.errors.full_messages.join('') %>');
+<% end %>
