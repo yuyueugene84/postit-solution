@@ -22,6 +22,7 @@ end
 
 #using normal metaprogramming
 =begin
+
   module Voteable
     #this is the callback that will be fired when included in parent class(base)
     def self.included(base)
@@ -53,4 +54,5 @@ end
     end
 
   end
+  
 =end

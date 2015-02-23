@@ -23,6 +23,35 @@ class User < ActiveRecord::Base
   def moderator?
     self.role == 'moderator'
   end
+
+  def two_factor_auth?
+    !self.phone.blank?
+  end
+
+  def generate_pin!
+    self.update_column(:pin, rand(10 ** 6)) #random six digit number
+  end
+
+  def remove_pin!
+    self.update_column(:pin, nil) #update pin with nothing
+  end
+
+  def send_pin_to_twilio
+    # put your own credentials here
+    account_sid = 'ACe93e32fab7c6dc200429fe84f340e289'
+    auth_token = '8590ca5e312a71143ef80e410ef7c0e8'
+
+    # set up a client to talk to the Twilio REST API
+    client = Twilio::REST::Client.new account_sid, auth_token
+
+    msg = "Hi, please input the pin to continue login! #{self.pin}"
+
+    message = client.account.messages.create({
+      :from => '+14692754937',
+      :to => '011886988178863',
+      :body => msg,
+    })
+  end
   # def to_param
   #   self.slug
   # end

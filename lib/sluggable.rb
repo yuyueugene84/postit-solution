@@ -21,8 +21,6 @@ module Sluggable
       count += 1
     end
 
-    binding.pry
-
     self.slug = the_slug.downcase
 
   end
