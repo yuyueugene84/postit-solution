@@ -2,12 +2,12 @@ class CommentsController < ApplicationController
   before_action :require_user, only:[:create, :vote]
 
   def create
-    #binding.pry
-    #@post = Post.find(params[:post_id])
-    @post = Post.find_by(slug: params[:post_id])
 
+    @post = Post.find_by(slug: params[:post_id])
     @comment = @post.comments.build(params.require(:comment).permit(:body))
     @comment.creator = current_user
+
+    #binding.pry
 
     if @comment.save
       flash[:notice] = "Comment created！"

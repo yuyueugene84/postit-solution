@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   before_action :post_setup, only: [:show, :edit, :update, :vote]
-  before_action :require_user, except: [:index, :show] 
+  before_action :require_user, except: [:index, :show]
   before_action :require_creator, only: [:edit, :update] #has to be original creator or admin to edit post
 
   def index

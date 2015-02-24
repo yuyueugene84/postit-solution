@@ -42,7 +42,7 @@
 
 <% if !@post.comments.empty? %>
 <h4>Comments for this post:</h4>
-  <% @comments.each do |comment| %>
-    <%= render 'comments', comment: comment, show_post: false %>
+  <% @post.reload.comments.each do |comment| %>
+    <%= render 'posts/comments', comment: comment, show_post: false %>
   <% end %>
 <% end %>
