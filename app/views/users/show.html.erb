@@ -23,13 +23,13 @@
 
 <% if params[:tab].nil? %>
 
-  <% current_user.posts.each do |post|%>
+  <% @user.posts.each do |post|%>
     <%= render 'posts/post', post: post %>
   <% end %>
 
 <% else %>
 
-  <% current_user.comments.each do |comment| %>
+  <% @user.comments.each do |comment| %>
     <%= render 'posts/comments', comment: comment, show_post: true %>
   <% end %>
 
