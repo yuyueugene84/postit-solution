@@ -54,6 +54,7 @@ class PostsController < ApplicationController
     else
       render :edit
     end
+    
   end
 
   def destroy

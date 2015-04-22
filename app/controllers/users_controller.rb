@@ -37,8 +37,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    #params.require(:user).permit(:username, :password, :timezone)
-    params.require(:user).permit(:username, :password, :timezone, :phone) #for two factor autehnication
+    params.require(:user).permit(:username, :password, :timezone)
+    #params.require(:user).permit(:username, :password, :timezone, :phone) #for two factor autehnication
   end
 
   def set_user
